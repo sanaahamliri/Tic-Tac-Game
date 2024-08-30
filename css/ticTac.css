@@ -4,3 +4,14 @@ body {
     background-color: #000000;
     color: #ffffff;
   }
+
+  
+#game {
+    text-align: center;
+  }
+  
+  .upbar-container {
+    height: 50px;
+    background-color: #333333;
+  }
+  

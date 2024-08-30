@@ -21,8 +21,6 @@ function animateTitle() {
 
 animateTitle();
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const startButton = document.querySelector('button');
     const profiles = document.querySelectorAll('.profile');
