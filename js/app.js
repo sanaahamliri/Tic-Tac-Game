@@ -20,3 +20,40 @@ function animateTitle() {
 }
 
 animateTitle();
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const startButton = document.querySelector('button');
+    const profiles = document.querySelectorAll('.profile');
+    const UserName = document.getElementById('userPseudo');
+
+    let selectedProfile = null;
+
+    profiles.forEach(profile => {
+        profile.addEventListener('click', function() {
+            profiles.forEach(p => p.classList.remove('selected'));
+            profile.classList.add('selected');
+            selectedProfile = profile.id;
+        });
+    });
+
+    startButton.addEventListener('click', function() {
+        const userPseudo = UserName.value.trim();
+        
+        if (!selectedProfile) {
+            alert('Please select a profile.');
+            return;
+        }
+        
+        if (!userPseudo) {
+            alert('Please enter your pseudo.');
+            return;
+        }
+        
+        localStorage.setItem('selectedProfile', selectedProfile);
+        localStorage.setItem('userPseudo', userPseudo);
+        
+        window.location.href = 'ticTac.html';
+    });
+});
