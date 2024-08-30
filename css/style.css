@@ -84,3 +84,17 @@ button:hover {
   transform: scale(1.1);
 }
 
+#pseudoContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#userPseudo {
+  width: 200px;
+  padding: 10px;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
