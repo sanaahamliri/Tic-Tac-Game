@@ -1,11 +1,18 @@
 let selectedProfile = localStorage.getItem('selectedProfile');
 let selectedName = localStorage.getItem('userPseudo');
-console.log(selectedProfile)
+let selectedImageUrl = localStorage.getItem('selectedImageUrl');
+
 let profileElement = document.getElementById('profile');
-let pseudoElement = document.getElementsById('userName');
+let pseudoElement = document.getElementById('userName');
 
-console.log(profileElement)
-profileElement.textContent = 'profile : ' + selectedProfile;
-pseudoElement.textContent = selectedName;
+pseudoElement.textContent = 'Pseudo : ' + selectedName;
 
-
+if (selectedImageUrl) {
+    profileElement.style.backgroundImage = `url('${selectedImageUrl}')`;
+    profileElement.style.width = '200px';
+    profileElement.style.height = '200px';
+    profileElement.style.backgroundSize = 'cover';
+    profileElement.style.backgroundPosition = 'center';
+} else {
+    profileElement.textContent = 'Profil : ' + selectedProfile;
+}

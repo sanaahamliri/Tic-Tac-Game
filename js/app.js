@@ -8,7 +8,6 @@ let speed = 0.005;
 function animateTitle() {
     scale += speed * direction;
     title.style.transform = `scale(${scale})`;
-
     if (scale >= maxScale || scale <= minScale) {
         direction *= -1;
     }
@@ -27,12 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const UserName = document.getElementById('userPseudo');
 
     let selectedProfile = null;
+    let selectedImageUrl = null;
 
     profiles.forEach(profile => {
         profile.addEventListener('click', function() {
             profiles.forEach(p => p.classList.remove('selected'));
             profile.classList.add('selected');
             selectedProfile = profile.id;
+            selectedImageUrl = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
         });
     });
 
@@ -51,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         localStorage.setItem('selectedProfile', selectedProfile);
         localStorage.setItem('userPseudo', userPseudo);
+        localStorage.setItem('selectedImageUrl', selectedImageUrl);
         
         window.location.href = 'ticTac.html';
     });
 });
+
