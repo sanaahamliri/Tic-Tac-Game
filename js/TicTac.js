@@ -4,6 +4,10 @@ let currentPlayer = 'X';
 let cells = [];
 let gameActive = true;
 
+
+if (!localStorage.getItem('scoreX')) localStorage.setItem('scoreX', '0');
+if (!localStorage.getItem('scoreO')) localStorage.setItem('scoreO', '0');
+
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('board');
 
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nameElem2.textContent = userName2 || 'Default User 2';
 
     updatePlayerBorders();
+    updateScoreDisplay();
 });
 
 function onCellClick(event) {
@@ -60,10 +65,11 @@ function onCellClick(event) {
     cell.innerHTML = currentPlayer;
     if (isWinningMove()) {
         setTimeout(() => {
-            const winnerName = currentPlayer === 'X' 
-                ? localStorage.getItem('userPseudo1') || 'Player 1' 
+            const winnerName = currentPlayer === 'X'
+                ? localStorage.getItem('userPseudo1') || 'Player 1'
                 : localStorage.getItem('userPseudo2') || 'Player 2';
             alert(`${winnerName} wins!`);
+            updateScores(); 
             resetGame();
         }, 100);
         return;
@@ -115,8 +121,27 @@ function updatePlayerBorders() {
     const profileElem1 = document.getElementById('profile1');
     const profileElem2 = document.getElementById('profile2');
 
-    profileElem1.style.border = currentPlayer === 'X' ? '5px solid  #00ff00' : 'none';
-    profileElem2.style.border = currentPlayer === 'O' ? '5px solid  #00ff00' : 'none';
+    profileElem1.style.border = currentPlayer === 'X' ? '5px solid #00ff00' : 'none';
+    profileElem2.style.border = currentPlayer === 'O' ? '5px solid #00ff00' : 'none';
+}
+
+function updateScores() {
+    if (currentPlayer === 'X') {
+        let scoreX = parseInt(localStorage.getItem('scoreX'), 10) + 1;
+        localStorage.setItem('scoreX', scoreX);
+    } else {
+        let scoreO = parseInt(localStorage.getItem('scoreO'), 10) + 1;
+        localStorage.setItem('scoreO', scoreO);
+    }
+    updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+    const scoreX = localStorage.getItem('scoreX');
+    const scoreO = localStorage.getItem('scoreO');
+    
+    document.getElementById('score1').textContent = `Score : ${scoreX}`;
+    document.getElementById('score2').textContent = `Score : ${scoreO}`;
 }
 
 function resetGame() {
@@ -125,3 +150,33 @@ function resetGame() {
     currentPlayer = 'X';
     updatePlayerBorders();
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('restart-btn').addEventListener('click', restartGame);
+    document.getElementById('exit-btn').addEventListener('click', exitGame);
+});
+
+function restartGame() {
+    cells.forEach(cell => cell.innerHTML = '');
+    gameActive = true;
+    currentPlayer = 'X';
+    updatePlayerBorders();
+    updateScoreDisplay(); 
+}
+
+function exitGame() {
+    localStorage.removeItem('scoreX');
+    localStorage.removeItem('scoreO');
+    localStorage.removeItem('selectedImageUrl1');
+    localStorage.removeItem('userPseudo1');
+    localStorage.removeItem('selectedImageUrl2');
+    localStorage.removeItem('userPseudo2');
+
+    window.location.href = 'index.html'; 
+}
+
+
+
+

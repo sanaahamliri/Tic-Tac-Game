@@ -34,16 +34,20 @@ document.addEventListener('DOMContentLoaded', function() {
     profiles.forEach(profile => {
         profile.addEventListener('click', function() {
             if (!selectedProfile1) {
-                profiles.forEach(p => p.classList.remove('selected'));
                 profile.classList.add('selected');
                 selectedProfile1 = profile.id;
                 selectedImageUrl1 = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
             } else if (!selectedProfile2 && profile.id !== selectedProfile1) {
-                profiles.forEach(p => p.classList.remove('selected'));
                 profile.classList.add('selected');
                 selectedProfile2 = profile.id;
                 selectedImageUrl2 = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
             }
+            
+            profiles.forEach(p => {
+                if (p.id !== selectedProfile1 && p.id !== selectedProfile2) {
+                    p.classList.remove('selected');
+                }
+            });
         });
     });
 
@@ -61,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-       
         localStorage.setItem('userPseudo1', pseudo1);
         localStorage.setItem('userPseudo2', pseudo2);
         localStorage.setItem('selectedImageUrl1', selectedImageUrl1);
@@ -70,3 +73,4 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'ticTac.html';
     });
 });
+

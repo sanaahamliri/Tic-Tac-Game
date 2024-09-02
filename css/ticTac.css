@@ -93,3 +93,35 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-top: 20px;
+  left: 45%;
+  top: 7px;
+}
+
+.controls button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#restart-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#exit-btn {
+  background-color: #f44336;
+  color: white;
+}
+#score1{
+  margin-left: 46px;
+}
