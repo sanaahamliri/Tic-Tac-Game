@@ -23,38 +23,50 @@ animateTitle();
 document.addEventListener('DOMContentLoaded', function() {
     const startButton = document.querySelector('button');
     const profiles = document.querySelectorAll('.profile');
-    const UserName = document.getElementById('userPseudo');
+    const userPseudo1 = document.getElementById('userPseudo1');
+    const userPseudo2 = document.getElementById('userPseudo2');
 
-    let selectedProfile = null;
-    let selectedImageUrl = null;
+    let selectedProfile1 = null;
+    let selectedProfile2 = null;
+    let selectedImageUrl1 = null;
+    let selectedImageUrl2 = null;
 
     profiles.forEach(profile => {
         profile.addEventListener('click', function() {
-            profiles.forEach(p => p.classList.remove('selected'));
-            profile.classList.add('selected');
-            selectedProfile = profile.id;
-            selectedImageUrl = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
+            if (!selectedProfile1) {
+                profiles.forEach(p => p.classList.remove('selected'));
+                profile.classList.add('selected');
+                selectedProfile1 = profile.id;
+                selectedImageUrl1 = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
+            } else if (!selectedProfile2 && profile.id !== selectedProfile1) {
+                profiles.forEach(p => p.classList.remove('selected'));
+                profile.classList.add('selected');
+                selectedProfile2 = profile.id;
+                selectedImageUrl2 = window.getComputedStyle(profile).backgroundImage.slice(5, -2);
+            }
         });
     });
 
     startButton.addEventListener('click', function() {
-        const userPseudo = UserName.value.trim();
+        const pseudo1 = userPseudo1.value.trim();
+        const pseudo2 = userPseudo2.value.trim();
         
-        if (!selectedProfile) {
-            alert('Please select a profile.');
+        if (!selectedProfile1 || !selectedProfile2) {
+            alert('Please select both profiles.');
             return;
         }
         
-        if (!userPseudo) {
-            alert('Please enter your pseudo.');
+        if (!pseudo1 || !pseudo2) {
+            alert('Please enter both pseudos.');
             return;
         }
         
-        localStorage.setItem('selectedProfile', selectedProfile);
-        localStorage.setItem('userPseudo', userPseudo);
-        localStorage.setItem('selectedImageUrl', selectedImageUrl);
+       
+        localStorage.setItem('userPseudo1', pseudo1);
+        localStorage.setItem('userPseudo2', pseudo2);
+        localStorage.setItem('selectedImageUrl1', selectedImageUrl1);
+        localStorage.setItem('selectedImageUrl2', selectedImageUrl2);
         
         window.location.href = 'ticTac.html';
     });
 });
-

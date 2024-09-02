@@ -5,19 +5,32 @@ body {
   color: #ffffff;
 }
 
-#profileContainer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+#game {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 20px;
 }
 
-#profile {
+.profile-image {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background-color: #ddd;
+  background-size: cover;
+  background-position: center;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.profile {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -27,18 +40,30 @@ body {
   margin-left: 30px;
 }
 
-#userName {
+.userName {
   font-size: 1em;
   color: #ffffff;
   margin-left: 48px;
 }
-.items {
+
+.items-right {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: center;
+  align-items: flex-start;
   position: absolute;
+  top: 20px;
+  right: 20px;
+  margin-right: 25px;
 }
+
+#profile2 {
+  margin-left: 0;
+}
+
+#userName2 {
+  margin-left: 0;
+}
+
 #board {
   display: grid;
   grid-template-columns: repeat(20, 40px);
@@ -49,7 +74,7 @@ body {
 .cell {
   width: 40px;
   height: 40px;
-  background-color:  #00ff003d;
+  background-color: #00ff003d;
   border: 1px solid #000;
   display: flex;
   align-items: center;
